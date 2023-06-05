@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "Pelak";
+    src: url("./fonts/Pelak/Pelak-Regular.woff") format("woff");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Pelak";
+    src: url("./fonts/Pelak/Pelak-Medium.woff") format("woff");
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Pelak";
+    src: url("./fonts/Pelak/Pelak-SemiBold.woff") format("woff");
+    font-weight: 600;
+}
+@font-face {
+    font-family: "Pelak";
+    src: url("./fonts/Pelak/Pelak-Bold.woff") format("woff");
+    font-weight: 700;
+}
+@font-face {
+    font-family: "Pelak";
+    src: url("./fonts/Pelak/Pelak-ExtraBold.woff") format("woff");
+    font-weight: 800;
+}
+@font-face {
+    font-family: "Pelak";
+    src: url("./fonts/Pelak/Pelak-Black.woff") format("woff");
+    font-weight: 900;
+}
+@font-face {
+    font-family: "Pelak-Farsi-Numeral";
+    src: url("./fonts/Pelak/Farsi-Numeral/PelakFA-SemiBold.woff") format("woff");
+    font-weight: 600;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./images/favicon.svg">
+    <title>پروفایل <%= name %></title>
+</head>
+<body>
+    <div class="login-logo"></div>
+    <h1 id="login-heading">ساب‌نت</h1>
+    <div class="user-area">
+        <h2 class="user-heading">👋🏻 سلام، <span><%= name %></span></h2>
+        <h2 class="user-heading">👤 اطلاعات پروفایل VPN</h2>
+        <h3 class="account-heading">🏷 نام کابری: <span><%= username %></span></h3>
+        <h3 class="account-heading">🔐 گذرواژه عددی: <span><%= pin %></span></h3>
+        <h3 class="account-heading">📅 تاریخ شروع اشتراک: <span><%= date %></span></h3>
+        <h3 class="account-heading">📆 تاریخ اتمام اشتراک: <span><%= expirationDate %></span></h3>
+        <% if (remainingDays <= 0) { %>
+            <h3 class="account-heading">⚠️ اشتراک شما تمام شده است!</span></h3>
+        <% } else { %>
+            <h3 class="account-heading">⏰ زمان باقی مانده: <span><%= remainingDays %> روز</span></h3>
+        <% } %>
+    </div>
+    <div class="logout">
+        <a href="/user">خروج</a>
+    </div>
+</body>
+</html>
+

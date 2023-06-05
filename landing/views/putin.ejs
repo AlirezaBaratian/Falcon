@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/favicon.svg">
+    <title>ثبت کاربر</title>
+</head>
+<body>
+    <div class="login-arean">
+        <div class="login-logo"></div>
+    <h1 id="login-heading">ساب‌نت</h1>
+    <form action="/putin" method="POST" class="login-form">
+        <label for="name">نام</label>
+        <br>
+        <input type="text" name="name" id="username">
+        <br>
+        <label for="username">نام کاربری</label>
+        <br>
+        <input type="text" name="username" id="username">
+        <br>
+        <label for="date">تاریخ شروع اشتراک</label>
+        <br>
+        <input type="text" name="date" id="username">
+        <br>
+        <label for="duration">مدت اشتراک</label>
+        <br>
+        <input type="text" name="duration" id="username">
+        <br>
+        <label for="pin">گذرواژه عددی</label>
+        <br>
+        <input type="password" pattern="[0-9]*" inputmode="numeric" name="pin" id="pin">
+        <br>
+        <button type="submit" class="login-form-submit">ثبت</button>
+    </form>
+    </div>
+</body>
+</html>
