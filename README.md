@@ -1,2 +1,2 @@
 # Falcon
-Falcon Project Dedicated to Accessing the Free Internet
+Falcon poroject dedicated to accessing the free internet
