@@ -6,19 +6,31 @@ const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 const commands = {
+  start: "/start",
   warningCommand: "⚠️ نمایش پیام اخطار",
   writeConfigsCommand: "🍬 ارسال پیام کانفیگ‌های کاربر",
 };
 
-const mainMenu = [
+const mainMenuButtons = [
   [{ text: commands.warningCommand }, { text: commands.writeConfigsCommand }],
 ];
 
-let uuid = "42175160-3d7c-4d4e-a9d1-e4704b3edbab"
+const mainMenu = JSON.stringify({
+  keyboard: mainMenuButtons,
+  resize_keboard: true,
+  one_time_keyboard: true,
+});
+
+let userPosition = {};
 
 wrongMessage = (userId) => {
   const wrongMessageError = "پیام ارسالی اشتباه است 🥲";
   bot.sendMessage(userId, wrongMessageError);
+};
+
+sendUuid = (userId) => {
+  uuidMessage = "حالا UUID کاربر را بفرستید 🤗";
+  bot.sendMessage(userId, uuidMessage);
 };
 
 function writeConfigsMessage(userId, uuid) {
@@ -29,27 +41,19 @@ function writeConfigsMessage(userId, uuid) {
   <b>⚠️ در صورت به اشتراک گذاشتن آن با افراد دیگر، ترافیک استفاده شده آن‌ها برای شما محاسبه می‌شود.</b>\n
   <b>🚀 کانفیگ مستقیم با پروتکل جدید REALITY (مخصوص برنامه‌های اپدیت شده)</b>\n
   <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdimage.debian.org&type=grpc&alpn=h2&path=vsAOpPEzSsvX2BCPs2RMc6r&serviceName=vsAOpPEzSsvX2BCPs2RMc6r&mode=gun&encryption=none&fp=chrome&headerType=None&security=reality&pbk=vOTUFJoSCYLV8WGvi_Wdy1v9oc9ICy43pzBzeRLRJSQ&sid=74247c95bc2c#Falcon_REALITY</code>\n
-  <b>📼 قدیمی (سرعت و کیفیت پایین برای برنامه‌های قدیمی‌تر)</b>\n
-  <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdn.thesubnet.online&type=ws&alpn=http/1.1&path=/vsAOpPEzSsX6ybCJDCkV7iB6&host=cdn.thesubnet.online&encryption=none&fp=chrome&headerType=None&security=tls#Falcon_Old</code>\n
   <b>پروفایل کاربری شما جهت مشاهده میزان مصرف، مدت مانده از بسته و کانفیگ‌ها </b>\n
   https://my.thesubnet.online/9MwC4h5OjqMr41MCOFCf/${uuid}/\n
   <b>این لینک را حتماً بدون فیلترشکن باز کنید ⚠️</b>\n
   `;
   bot.sendMessage(userId, configsMessage, {
     parse_mode: "HTML",
-    reply_markup: JSON.stringify({
-      keyboard: mainMenu,
-      is_persistent: true,
-      resize_keboard: true,
-      one_time_keyboard: true,
-    }),
+    reply_markup: mainMenu,
   });
 }
 
 function writeWarningMessage(userId) {
   const warningMessage = `
-  <b>⚠️ اخطار: سرویس جدید اینترنت ملی راه اندازی شد و از چند ساعت دیگه کانفیگ‌های قبلی رو خاموش می‌کنم.
-  لطفاً هرچه سریع‌تر نرم‌افزار خودتون رو اپدیت کنید و کانفیگ‌‌های جدیدتون رواستفاده کنید ☝🏼</b>\n
+  <b>لطفاً هرچه سریع‌تر نرم‌افزار خودتون رو اپدیت کنید و کانفیگ‌‌های جدیدتون رواستفاده کنید ☝🏼</b>\n
   کاربران iOS از نرم‌افزار FoXray یا V2Box استفاده کنید:
   
   🏎 FoXray (iOS +16)
@@ -67,39 +71,38 @@ function writeWarningMessage(userId) {
   `;
   bot.sendMessage(userId, warningMessage, {
     parse_mode: "HTML",
-    reply_markup: JSON.stringify({
-      keyboard: mainMenu,
-      is_persistent: true,
-      resize_keboard: true,
-      one_time_keyboard: true,
-    }),
+    reply_markup: mainMenu,
   });
 }
 
 function startCommand(userId, commands) {
   bot.sendMessage(userId, "خوش آمدید 🌹", {
-    reply_markup: JSON.stringify({
-      keyboard: mainMenu,
-      is_persistent: true,
-      resize_keboard: true,
-      one_time_keyboard: true,
-    }),
+    reply_markup: mainMenu,
   });
 }
 
-parseMessage = (userId, messageText) => {
+parseMessage = (userId, messageText, messageId) => {
   switch (messageText) {
-    case "/start":
+    case commands.start:
       startCommand(userId, commands);
       break;
     case commands.warningCommand:
       writeWarningMessage(userId);
       break;
     case commands.writeConfigsCommand:
-      writeConfigsMessage(userId, uuid);
+      userPosition[userId] = messageId;
+      sendUuid(userId);
+      console.log(userPosition);
+
       break;
     default:
-      wrongMessage(userId);
+      console.log(userPosition);
+      console.log(messageId);
+      if (messageId == userPosition[userId] + 2) {
+        writeConfigsMessage(userId, messageText);
+      } else {
+        wrongMessage(userId);
+      }
   }
 };
 
@@ -119,7 +122,7 @@ bot.on("message", (msg) => {
   const messageText = msg.text;
 
   if (isAdmin(userId)) {
-    parseMessage(userId, messageText);
+    parseMessage(userId, messageText, msg.message_id);
   }
 });
 
