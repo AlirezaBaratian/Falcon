@@ -51,16 +51,22 @@ function writeConfigsMessage(userId, uuid) {
   });
 }
 
-function writeWarningMessage(userId) {
-  const warningMessage = `
+function writeGuideMessage(userId) {
+  const guideMessage = `
   <b>لطفاً هرچه سریع‌تر نرم‌افزار خودتون رو اپدیت کنید و کانفیگ‌‌های جدیدتون رواستفاده کنید ☝🏼</b>\n
   کاربران iOS از نرم‌افزار FoXray یا V2Box استفاده کنید:
   
   🏎 FoXray (iOS +16)
   https://apps.apple.com/app/foxray/id6448898396
+  
+  🦊 آموزش راه اندازی FoXray
+  https://github.com/hiddify/hiddify-config/wiki/%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%DA%A9%D8%A7%D8%B1-%D8%A8%D8%A7-%D9%86%D8%B1%D9%85%E2%80%8C%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-FoXray#%D8%A7%D8%B6%D8%A7%D9%81%D9%87-%DA%A9%D8%B1%D8%AF%D9%86-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF%D9%87%D8%A7%DB%8C-%D8%AA%DA%A9%DB%8C
+
 
   📦 V2Box
   https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690
+  📲 آموزش راه اندازی V2Box
+  https://github.com/hiddify/hiddify-config/wiki/%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%DA%A9%D8%A7%D8%B1-%D8%A8%D8%A7-%D9%86%D8%B1%D9%85%E2%80%8C%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-V2Box#%D8%A7%D8%B6%D8%A7%D9%81%D9%87-%DA%A9%D8%B1%D8%AF%D9%86-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF%D9%87%D8%A7-%D8%A8%D9%87-%D8%B5%D9%88%D8%B1%D8%AA-%D8%AA%DA%A9%DB%8C
   
   کاربران Android اپ v2rayNG خودتون رو از Play Store اپدیت کنید یا از لینک پایینش مستقیم دانلود کنید:
 
@@ -68,8 +74,13 @@ function writeWarningMessage(userId) {
 
   ⏬ https://github.com/2dust/v2rayNG/releases/download/1.8.5/v2rayNG_1.8.5.apk
 
+  🌶 آموزش راه اندازی v2rayNG
+  1️⃣ ابتدا لینک کانفیگ را کپی کرده و برنامه را باز کنید.
+  2️⃣ سپس آیکون + را انتخاب و گزینه Import v2ray config from clipboard را انتخاب کنید.
+  3️⃣ از آیکون اصلی برنامه در بخش پایین برای اتصال و یا قطع اتصال استفاده کنید.
+
   `;
-  bot.sendMessage(userId, warningMessage, {
+  bot.sendMessage(userId, guideMessage, {
     parse_mode: "HTML",
     reply_markup: mainMenu,
   });
@@ -87,7 +98,7 @@ parseMessage = (userId, messageText, messageId) => {
       startCommand(userId, commands);
       break;
     case commands.warningCommand:
-      writeWarningMessage(userId);
+      writeGuideMessage(userId);
       break;
     case commands.writeConfigsCommand:
       userPosition[userId] = messageId;
