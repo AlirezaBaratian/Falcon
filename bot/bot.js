@@ -7,12 +7,12 @@ const bot = new TelegramBot(token, { polling: true });
 
 const commands = {
   start: "/start",
-  warningCommand: "⚠️ نمایش پیام اخطار",
-  writeConfigsCommand: "🍬 ارسال پیام کانفیگ‌های کاربر",
+  guide: "🗒 آموزش‌ها",
+  configs: "🚀 پیام کانفیگ",
 };
 
 const mainMenuButtons = [
-  [{ text: commands.warningCommand }, { text: commands.writeConfigsCommand }],
+  [{ text: commands.guide }, { text: commands.configs }],
 ];
 
 const mainMenu = JSON.stringify({
@@ -33,7 +33,7 @@ sendUuid = (userId) => {
   bot.sendMessage(userId, uuidMessage);
 };
 
-function writeConfigsMessage(userId, uuid) {
+function sendConfigsMessage(userId, uuid) {
   const configsMessage = `
   <b>📑 لینک‌های اتصال</b>
   ℹ️ شما می‌توانید کانفیگ‌های زیر را بر اساس اپراتور اینترنت خود با لمس بر روی آن‌ها کپی و استفاده کنید.\n
@@ -51,9 +51,9 @@ function writeConfigsMessage(userId, uuid) {
   });
 }
 
-function writeGuideMessage(userId) {
+function sendGuideMessage(userId) {
   const guideMessage = `
-  <b>لطفاً هرچه سریع‌تر نرم‌افزار خودتون رو اپدیت کنید و کانفیگ‌‌های جدیدتون رواستفاده کنید ☝🏼</b>\n
+  <b>لطفاً نرم‌افزار خودتون رو اپدیت کنید و کانفیگ‌‌های جدیدتون رواستفاده کنید ☝🏼</b>\n
   کاربران iOS از نرم‌افزار FoXray یا V2Box استفاده کنید:
   
   🏎 FoXray (iOS +16)
@@ -97,20 +97,16 @@ parseMessage = (userId, messageText, messageId) => {
     case commands.start:
       startCommand(userId, commands);
       break;
-    case commands.warningCommand:
-      writeGuideMessage(userId);
+    case commands.guide:
+      sendGuideMessage(userId);
       break;
-    case commands.writeConfigsCommand:
+    case commands.configs:
       userPosition[userId] = messageId;
       sendUuid(userId);
-      console.log(userPosition);
-
       break;
     default:
-      console.log(userPosition);
-      console.log(messageId);
       if (messageId == userPosition[userId] + 2) {
-        writeConfigsMessage(userId, messageText);
+        sendConfigsMessage(userId, messageText);
       } else {
         wrongMessage(userId);
       }
