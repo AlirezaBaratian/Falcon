@@ -90,7 +90,7 @@ function sendGuideMessage(userId) {
   });
 }
 
-function startCommand(userId, commands) {
+function startCommand(userId) {
   bot.sendMessage(userId, "خوش آمدید 🌹", {
     reply_markup: mainMenu,
   });
@@ -112,10 +112,10 @@ const sendHiddifyBot = (userId, uuid) => {
   });
 };
 
-parseMessage = (userId, messageText, messageId) => {
+parseMessage = (userId, messageText) => {
   switch (messageText) {
     case commands.start:
-      startCommand(userId, commands);
+      startCommand(userId);
       break;
     case commands.guide:
       sendGuideMessage(userId);
@@ -155,7 +155,7 @@ bot.on("message", (msg) => {
   const messageText = msg.text;
 
   if (isAdmin(userId)) {
-    parseMessage(userId, messageText, msg.message_id);
+    parseMessage(userId, messageText);
   }
 });
 
