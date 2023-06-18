@@ -9,10 +9,15 @@ const commands = {
   start: "/start",
   guide: "🗒 آموزش‌ها",
   configs: "🚀 پیام کانفیگ",
+  hiddifyBot: "📶 ربات هیدیفای",
 };
 
 const mainMenuButtons = [
-  [{ text: commands.guide }, { text: commands.configs }],
+  [
+    { text: commands.guide },
+    { text: commands.configs },
+    { text: commands.hiddifyBot },
+  ],
 ];
 
 const mainMenu = JSON.stringify({
@@ -91,6 +96,22 @@ function startCommand(userId, commands) {
   });
 }
 
+const sendHiddifyBot = (userId, uuid) => {
+  const hiddifyBotMessage = `
+  <b>🤖 ربات مشاهده وضعیت بست</b>\n
+  🔮 برای استفاده از این ربات کافیه روی لینک اختصاصی خودتون کلیک کنید و در صفحه ربات گزینه START را فشار بدید.\n
+  \n
+  🖇 tg://resolve?domain=my_falcon_hiddify_bot&start=${uuid}\n
+  \n
+  ☝️ از این به بعد هم هر موقع خواستید وضعیت بسته‌تون رو دوباره چک کنید، وارد چت ربات بشید و روی دکمه update زیر پیام مصرف‌تون بزنید.
+  `;
+
+  bot.sendMessage(userId, hiddifyBotMessage, {
+    parse_mode: "HTML",
+    reply_markup: mainMenu,
+  });
+};
+
 parseMessage = (userId, messageText, messageId) => {
   switch (messageText) {
     case commands.start:
@@ -100,12 +121,18 @@ parseMessage = (userId, messageText, messageId) => {
       sendGuideMessage(userId);
       break;
     case commands.configs:
-      userPosition[userId] = messageId;
+      userPosition[userId] = commands.configs;
+      sendUuid(userId);
+      break;
+    case commands.hiddifyBot:
+      userPosition[userId] = commands.hiddifyBot;
       sendUuid(userId);
       break;
     default:
-      if (messageId == userPosition[userId] + 2) {
+      if (userPosition[userId] == commands.configs) {
         sendConfigsMessage(userId, messageText);
+      } else if (userPosition[userId] == commands.hiddifyBot) {
+        sendHiddifyBot(userId, messageText);
       } else {
         wrongMessage(userId);
       }
