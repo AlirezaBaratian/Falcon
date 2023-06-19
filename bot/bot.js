@@ -50,10 +50,14 @@ function sendConfigsMessage(userId, uuid) {
   https://my.thesubnet.online/9MwC4h5OjqMr41MCOFCf/${uuid}/\n
   <b>این لینک را حتماً بدون فیلترشکن باز کنید ⚠️</b>\n
   `;
-  bot.sendMessage(userId, configsMessage, {
-    parse_mode: "HTML",
-    reply_markup: mainMenu,
-  });
+  bot
+    .sendMessage(userId, configsMessage, {
+      parse_mode: "HTML",
+      reply_markup: mainMenu,
+    })
+    .then(() => {
+      userPosition[userId] = null;
+    });
 }
 
 function sendGuideMessage(userId) {
@@ -98,7 +102,7 @@ function startCommand(userId) {
 
 const sendHiddifyBot = (userId, uuid) => {
   const hiddifyBotMessage = `
-  <b>🤖 ربات مشاهده وضعیت بست</b>\n
+  <b>🤖 ربات مشاهده وضعیت بسته</b>\n
   🔮 برای استفاده از این ربات کافیه روی لینک اختصاصی خودتون کلیک کنید و در صفحه ربات گزینه START را فشار بدید.\n
   \n
   🖇 tg://resolve?domain=my_falcon_hiddify_bot&start=${uuid}\n
@@ -106,10 +110,14 @@ const sendHiddifyBot = (userId, uuid) => {
   ☝️ از این به بعد هم هر موقع خواستید وضعیت بسته‌تون رو دوباره چک کنید، وارد چت ربات بشید و روی دکمه update زیر پیام مصرف‌تون بزنید.
   `;
 
-  bot.sendMessage(userId, hiddifyBotMessage, {
-    parse_mode: "HTML",
-    reply_markup: mainMenu,
-  });
+  bot
+    .sendMessage(userId, hiddifyBotMessage, {
+      parse_mode: "HTML",
+      reply_markup: mainMenu,
+    })
+    .then(() => {
+      userPosition[userId] = null;
+    });
 };
 
 parseMessage = (userId, messageText) => {
