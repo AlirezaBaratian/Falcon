@@ -131,3 +131,6 @@ dist
 
 # macOS specific
 .DS_Store
+
+# npm package-lock
+package-lock.json
