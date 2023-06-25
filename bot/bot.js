@@ -12,10 +12,7 @@ const commands = {
 };
 
 const mainMenuButtons = [
-  [
-    { text: commands.configs },
-    { text: commands.hiddifyBot },
-  ],
+  [{ text: commands.configs }, { text: commands.hiddifyBot }],
 ];
 
 const mainMenu = JSON.stringify({
@@ -164,9 +161,7 @@ bot.on("message", (msg) => {
   const userId = msg.from.id;
   const messageText = msg.text;
 
-  if (isAdmin(userId)) {
-    parseMessage(userId, messageText);
-  }
+  parseMessage(userId, messageText);
 });
 
 bot.on("polling_error", (err) => {
