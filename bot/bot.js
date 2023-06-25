@@ -160,17 +160,6 @@ parseMessage = (userId, messageText) => {
   }
 };
 
-function isAdmin(userId) {
-  const adminIds = [73860050];
-  const noPermissionMessage = "⛔️ شما دسترسی لازم به این ربات را ندارید!";
-
-  if (adminIds.includes(userId)) {
-    return true;
-  } else {
-    bot.sendMessage(userId, noPermissionMessage);
-  }
-}
-
 bot.on("message", (msg) => {
   const userId = msg.from.id;
   const messageText = msg.text;
