@@ -43,7 +43,13 @@ function sendConfigsMessage(userId, uuid) {
   <b>🚀 کانفیگ مستقیم با پروتکل جدید REALITY (مخصوص برنامه‌های اپدیت شده)</b>
 
 
-  <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdimage.debian.org&type=grpc&alpn=h2&path=vsAOpPEzSsvX2BCPs2RMc6r&serviceName=vsAOpPEzSsvX2BCPs2RMc6r&mode=gun&encryption=none&fp=chrome&headerType=None&security=reality&pbk=vOTUFJoSCYLV8WGvi_Wdy1v9oc9ICy43pzBzeRLRJSQ&sid=74247c95bc2c#Falcon_REALITY</code>\n
+  <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdimage.debian.org&type=grpc&alpn=h2&path=vsAOpPEzSsvX2BCPs2RMc6r&serviceName=vsAOpPEzSsvX2BCPs2RMc6r&mode=gun&encryption=none&fp=chrome&headerType=None&security=reality&pbk=vOTUFJoSCYLV8WGvi_Wdy1v9oc9ICy43pzBzeRLRJSQ&sid=74247c95bc2c#Falcon_REALITY</code>
+
+
+  <b>📼 کانفیگ موقت (فقط برای اپلیکیشن‌های قدیمی)</b>
+
+
+  <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdn.thesubnet.online&type=ws&alpn=http/1.1&path=/vsAOpPEzSsX6ybCJDCkV7iB6&host=cdn.thesubnet.online&encryption=none&fp=chrome&headerType=None&security=tls#Falcon_Temporary/code>
 
 
   <b>👤 پروفایل کاربری شما جهت مشاهده همه اطلاعات مورد نیاز</b>
