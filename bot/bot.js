@@ -49,7 +49,7 @@ function sendConfigsMessage(userId, uuid) {
   <b>📼 کانفیگ موقت (فقط برای اپلیکیشن‌های قدیمی)</b>
 
 
-  <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdn.thesubnet.online&type=ws&alpn=http/1.1&path=/vsAOpPEzSsX6ybCJDCkV7iB6&host=cdn.thesubnet.online&encryption=none&fp=chrome&headerType=None&security=tls#Falcon_Temporary/code>
+  <code>vless://${uuid}@cdn.thesubnet.online:443?hiddify=1&sni=cdn.thesubnet.online&type=ws&alpn=http/1.1&path=/vsAOpPEzSsX6ybCJDCkV7iB6&host=cdn.thesubnet.online&encryption=none&fp=chrome&headerType=None&security=tls#Falcon_Temporary</code>
 
 
   <b>👤 پروفایل کاربری شما جهت مشاهده همه اطلاعات مورد نیاز</b>
